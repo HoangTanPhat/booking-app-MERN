@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import express, { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import User from '../models/user';
+import verifyToken from '../middleware/auth';
 
 const router = express.Router();
 
@@ -37,13 +38,24 @@ router.post("/login", [
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 86400000 //1 day
-    })
+    });
 
     res.status(200).json({ userId: user._id });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Somethng went wrong" });
+    res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+  res.status(200).send({ userId: req.userId })
+})
+
+router.post("/logout", (req: Request, res: Response) => {
+  res.cookie("auth_token", "", {
+    expires: new Date(0)
+  })
+  res.send();
+})
 
 export default router;
