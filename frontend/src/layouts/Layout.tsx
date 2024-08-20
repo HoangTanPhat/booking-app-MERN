@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import Header from "../components/Header"
+import Header from "../components/Header";
 import Hero from "../components/Hero";
 
 interface LayoutProps {
@@ -14,7 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="container mx-auto py-10 flex-1">{children}</div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default Layout;
