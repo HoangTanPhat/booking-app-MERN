@@ -11,6 +11,7 @@ import Layout from './layouts/Layout';
 import AddHotel from './pages/AddHotel';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import MyHotels from './pages/MyHotels';
 
 function App() {
     const { isLoggedIn } = useAppContext();
@@ -63,6 +64,17 @@ function App() {
                         <ProtectedRoute>
                             <Layout>
                                 <AddHotel />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path='/my-hotels'
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <MyHotels />
                             </Layout>
                         </ProtectedRoute>
                     }
